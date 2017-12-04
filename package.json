@@ -76,7 +76,7 @@
     "wordpress-query-media": "^2.0.0-beta.1",
     "wordpress-query-menu": "^2.0.0-beta.1",
     "wordpress-query-page": "^2.0.0-beta.1",
-    "wordpress-query-posts": "^2.0.0-beta.1",
+    "wordpress-query-posts": "git+https://github.com/jpweller/wordpress-query-custom-posts.git",
     "wordpress-query-term": "^2.0.0-beta.1",
     "wordpress-query-user": "^2.0.0-beta.1"
   },
