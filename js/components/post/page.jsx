@@ -16,7 +16,6 @@ import stripTags from 'striptags';
 /**
  * Internal Dependencies
  */
-import Comments from 'components/comments';
 import { getContent, getFeaturedMedia, getTitle } from 'utils/content';
 import Media from './image';
 import Placeholder from 'components/placeholder';
@@ -52,21 +51,6 @@ class SinglePage extends React.Component {
 		);
 	};
 
-	renderComments = () => {
-		const post = this.props.post;
-		if ( ! post ) {
-			return null;
-		}
-
-		return (
-			<Comments
-				postId={ this.props.postId }
-				title={ <span dangerouslySetInnerHTML={ getTitle( post ) } /> }
-				commentsOpen={ 'open' === post.comment_status }
-			/>
-		);
-	};
-
 	render() {
 		if ( !! this.props.previewId ) {
 			return <PostPreview id={ this.props.previewId } />;
@@ -77,8 +61,6 @@ class SinglePage extends React.Component {
 				<QueryPage pagePath={ this.props.path } />
 
 				{ this.props.loading ? <Placeholder type="page" /> : this.renderArticle() }
-
-				{ ! this.props.loading && this.renderComments() }
 			</div>
 		);
 	}

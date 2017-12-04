@@ -1,5 +1,5 @@
-Foxhound
-========
+Portfolio Website
+=================
 
 A react-based theme for WordPress.
 

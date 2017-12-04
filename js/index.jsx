@@ -25,14 +25,11 @@ import { setMenu } from 'wordpress-query-menu/lib/state';
 import { setPost, setPosts } from './utils/initial-actions';
 
 // Components
-import Attachment from 'components/attachment';
-import Author from 'components/author';
-import DateArchive from 'components/date';
 import Index from 'components/posts';
 import Navigation from 'components/navigation';
 import NotFound from 'components/not-found';
-import Search from 'components/search';
 import SinglePage from 'components/post/page';
+import Doodles from 'components/doodlez';
 import SinglePost from 'components/post';
 import Term from 'components/term';
 
@@ -47,11 +44,8 @@ const path = FoxhoundSettings.URL.path || '/';
 function renderApp() {
 	let blogURL, frontPageRoute;
 	if ( FoxhoundSettings.frontPage.page ) {
-		blogURL = path + 'page/' + FoxhoundSettings.frontPage.blog + '/';
-		const FrontPageComponent = props => (
-			<SinglePage slug={ FoxhoundSettings.frontPage.page } { ...props } />
-		);
-		frontPageRoute = <Route path={ path } component={ FrontPageComponent } />; // eslint-disable-line react/jsx-no-bind
+		blogURL = path + FoxhoundSettings.frontPage.blog + '/';
+		frontPageRoute = <Route path={ path } slug={ FoxhoundSettings.frontPage.page } component={ SinglePage } />;
 	} else {
 		blogURL = path;
 		frontPageRoute = null;
@@ -59,34 +53,18 @@ function renderApp() {
 
 	const getTermComponent = taxonomy => props => <Term { ...props } taxonomy={ taxonomy } />;
 
+	// <Route path={ `${ path }doodles/` } component={ Doodles } />
+
 	// Routes
 	const routes = (
 		<ScrollToTop>
 			<Switch>
 				<Route path={ blogURL } exact component={ Index } />
-				<Route path={ `${ blogURL }p/:paged` } component={ Index } />
-				<Route path={ `${ path }:year/:month/:slug` } component={ SinglePost } />
-				<Route path={ `${ path }search/:search` } component={ Search } />
-				<Route path={ `${ path }attachment/:id` } component={ Attachment } />
+				<Route path={ `${ path }doodles/` } component={ Doodles } />
 				<Route path={ `${ path }category/:slug` } component={ getTermComponent( 'category' ) } />
-				<Route
-					path={ `${ path }category/:slug/p/:paged` }
-					component={ getTermComponent( 'category' ) }
-				/>
 				<Route path={ `${ path }tag/:slug` } component={ getTermComponent( 'post_tag' ) } />
-				<Route
-					path={ `${ path }tag/:slug/p/:paged` }
-					component={ getTermComponent( 'post_tag' ) }
-				/>
-				<Route path={ `${ path }date/:year` } component={ DateArchive } />
-				<Route path={ `${ path }date/:year/p/:paged` } component={ DateArchive } />
-				<Route path={ `${ path }date/:year/:month` } component={ DateArchive } />
-				<Route path={ `${ path }date/:year/:month/p/:paged` } component={ DateArchive } />
-				<Route path={ `${ path }date/:year/:month/:day` } component={ DateArchive } />
-				<Route path={ `${ path }date/:year/:month/:day/p/:paged` } component={ DateArchive } />
-				<Route path={ `${ path }author/:slug` } component={ Author } />
-				<Route path={ `${ path }author/:slug/p/:paged` } component={ Author } />
-				<Route path={ `${ path }page/**` } component={ SinglePage } />
+				<Route path={ `${ path }about` } component={ SinglePage } />
+				<Route path={ `${ path }:slug` } component={ SinglePost } />
 				{ frontPageRoute }
 				<Route path="*" component={ NotFound } />
 			</Switch>

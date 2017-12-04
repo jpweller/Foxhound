@@ -23,7 +23,7 @@ import Placeholder from 'components/placeholder';
 import PostList from './list';
 import PostPreview from 'components/post/preview';
 
-function Index( props ) {
+function Doodles( props ) {
 	if ( !! props.previewId ) {
 		return <PostPreview id={ props.previewId } />;
 	}
@@ -40,8 +40,8 @@ function Index( props ) {
 	return (
 		<div className="site-content">
 			<DocumentMeta { ...meta } />
-			<BodyClass classes={ [ 'home', 'blog' ] } />
-			<QueryPosts query={ props.query } />
+			<BodyClass classes={ [ 'doodles' ] } />
+			<QueryPosts postType={ 'doodles' } query={ props.query } />
 			{ props.loading ? <Placeholder type="posts" /> : <PostList posts={ posts } /> }
 		</div>
 	);
@@ -73,4 +73,4 @@ export default connect( ( state, { match, location } ) => {
 		loading: requesting && ! posts.length,
 		totalPages: getTotalPagesForQuery( state, query ),
 	};
-} )( Index );
+} )( Doodles );

@@ -16,7 +16,6 @@ import stripTags from 'striptags';
 /**
  * Internal Dependencies
  */
-import Comments from 'components/comments';
 import { getContent, getDate, getFeaturedMedia, getTitle } from 'utils/content';
 import Media from './image';
 import Placeholder from 'components/placeholder';
@@ -55,22 +54,6 @@ class SinglePost extends React.Component {
 		);
 	};
 
-	renderComments = () => {
-		const post = this.props.post;
-		if ( ! post ) {
-			return null;
-		}
-
-		return (
-			<Comments
-				protected={ post.content.protected }
-				postId={ this.props.postId }
-				title={ <span dangerouslySetInnerHTML={ getTitle( post ) } /> }
-				commentsOpen={ 'open' === post.comment_status }
-			/>
-		);
-	};
-
 	render() {
 		if ( !! this.props.previewId ) {
 			return <PostPreview id={ this.props.previewId } />;
@@ -80,8 +63,6 @@ class SinglePost extends React.Component {
 			<div className="card">
 				<QueryPosts postSlug={ this.props.slug } />
 				{ this.props.loading ? <Placeholder type="post" /> : this.renderArticle() }
-
-				{ ! this.props.loading && this.renderComments() }
 			</div>
 		);
 	}

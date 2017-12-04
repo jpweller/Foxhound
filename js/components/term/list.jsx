@@ -16,7 +16,6 @@ import {
  * Internal Dependencies
  */
 import PostList from 'components/posts/list';
-import Pagination from 'components/pagination/archive';
 import Placeholder from 'components/placeholder';
 
 class Term extends Component {
@@ -27,18 +26,11 @@ class Term extends Component {
 	}
 
 	render() {
-		const { query, posts, loading, path, page, totalPages } = this.props;
+		const { query, posts, loading } = this.props;
 		return (
 			<div>
 				<QueryPosts query={ query || {} } />
 				{ loading ? <Placeholder type="term" /> : <PostList posts={ posts } /> }
-
-				<Pagination
-					path={ path }
-					current={ page }
-					isFirstPage={ 1 === page }
-					isLastPage={ totalPages === page }
-				/>
 			</div>
 		);
 	}

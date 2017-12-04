@@ -270,5 +270,79 @@ add_filter( 'rest_allow_anonymous_comments', '__return_true' );
 // Include extra functionality.
 require get_template_directory() . '/inc/load-menu.php';
 require get_template_directory() . '/inc/load-data.php';
-require get_template_directory() . '/inc/permalinks.php';
 require get_template_directory() . '/inc/customizer.php';
+
+
+
+/*
+* Creating a function to create our CPT
+*/
+ 
+function custom_post_type() {
+ 
+// Set UI labels for Custom Post Type
+    $labels = array(
+        'name'                => _x( 'Doodles', 'Post Type General Name', 'twentythirteen' ),
+        'singular_name'       => _x( 'Doodle', 'Post Type Singular Name', 'twentythirteen' ),
+        'menu_name'           => __( 'Doodles', 'twentythirteen' ),
+        'parent_item_colon'   => __( 'Parent Doodle', 'twentythirteen' ),
+        'all_items'           => __( 'All Doodles', 'twentythirteen' ),
+        'view_item'           => __( 'View Doodle', 'twentythirteen' ),
+        'add_new_item'        => __( 'Add New Doodle', 'twentythirteen' ),
+        'add_new'             => __( 'Add New', 'twentythirteen' ),
+        'edit_item'           => __( 'Edit Doodle', 'twentythirteen' ),
+        'update_item'         => __( 'Update Doodle', 'twentythirteen' ),
+        'search_items'        => __( 'Search Doodles', 'twentythirteen' ),
+        'not_found'           => __( 'Not Found', 'twentythirteen' ),
+        'not_found_in_trash'  => __( 'Not found in Trash', 'twentythirteen' ),
+    );
+     
+// Set other options for Custom Post Type
+     
+    $args = array(
+        'label'               => __( 'doodles', 'twentythirteen' ),
+        'description'         => __( 'Fun, incomplete work', 'twentythirteen' ),
+        'labels'              => $labels,
+        // Features this CPT supports in Post Editor
+        // 'supports'            => array( 'title', 'editor', 'thumbnail', 'revisions', 'custom-fields', ),
+        'supports'            => array( 'title', 'thumbnail', 'revisions', ),
+        // You can associate this CPT with a taxonomy or custom taxonomy. 
+        'taxonomies'          => array( '' ),
+        /* A hierarchical CPT is like Pages and can have
+        * Parent and child items. A non-hierarchical CPT
+        * is like Posts.
+        */ 
+        'hierarchical'        => false,
+        'public'              => true,
+        'publicly_queryable'  => true,
+        'show_in_rest'        => true,
+        'query_var'           => true,
+        'show_ui'             => true,
+        'show_in_menu'        => true,
+        'show_in_nav_menus'   => true,
+        'show_in_admin_bar'   => true,
+        'menu_position'       => 5,
+        'can_export'          => true,
+        'has_archive'         => true,
+        'exclude_from_search' => false,
+        'publicly_queryable'  => true,
+        'capability_type'     => 'post',
+    );
+     
+    // Registering your Custom Post Type
+    register_post_type( 'doodles', $args );
+ 
+}
+ 
+/* Hook into the 'init' action so that the function
+* Containing our post type registration is not 
+* unnecessarily executed. 
+*/
+ 
+add_action( 'init', 'custom_post_type', 0 );
+
+
+function custom_menu_page_removing() {
+    remove_menu_page( 'edit-comments.php' );
+}
+add_action( 'admin_menu', 'custom_menu_page_removing' );
