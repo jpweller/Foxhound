@@ -7,7 +7,11 @@ import BodyClass from 'react-body-class';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
-import { getPage, getPageIdFromPath, isRequestingPage } from 'wordpress-query-page/lib/selectors';
+import {
+	getPage,
+	getPageIdFromPath,
+	isRequestingPage,
+} from 'wordpress-query-page/lib/selectors';
 import he from 'he';
 import qs from 'qs';
 import QueryPage from 'wordpress-query-page';
@@ -24,6 +28,7 @@ import PostPreview from './preview';
 class SinglePage extends React.Component {
 	renderArticle = () => {
 		const post = this.props.post;
+
 		if ( ! post ) {
 			return null;
 		}
@@ -37,6 +42,7 @@ class SinglePage extends React.Component {
 		const classes = classNames( {
 			entry: true,
 		} );
+
 		const featuredMedia = getFeaturedMedia( post );
 
 		return (

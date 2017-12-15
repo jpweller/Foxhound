@@ -9,7 +9,11 @@ import { Link } from 'react-router-dom';
 /**
  * Internal Dependencies
  */
-import { getTitle, getExcerpt, getDate } from 'utils/content';
+import {
+	getTitle,
+	getExcerpt,
+	getDate,
+} from 'utils/content';
 
 export default function Post( props ) {
 	const post = props;

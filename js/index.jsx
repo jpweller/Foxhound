@@ -29,7 +29,8 @@ import Index from 'components/posts';
 import Navigation from 'components/navigation';
 import NotFound from 'components/not-found';
 import SinglePage from 'components/post/page';
-import Doodles from 'components/doodlez';
+import Doodles from 'components/doodles';
+// import SingleDoodle from 'components/doodle';
 import SinglePost from 'components/post';
 import Term from 'components/term';
 
@@ -53,7 +54,7 @@ function renderApp() {
 
 	const getTermComponent = taxonomy => props => <Term { ...props } taxonomy={ taxonomy } />;
 
-	// <Route path={ `${ path }doodles/` } component={ Doodles } />
+	// <Route path={ `${ path }doodles/:slug` } component={ SingleDoodle } />
 
 	// Routes
 	const routes = (

@@ -10,10 +10,10 @@ import {
 	getPostsForQuery,
 	getTotalPagesForQuery,
 	isRequestingPostsForQuery,
-} from 'wordpress-query-posts/lib/selectors';
+} from 'wordpress-query-custom-posts/lib/selectors';
 import he from 'he';
 import qs from 'qs';
-import QueryPosts from 'wordpress-query-posts';
+import QueryPosts from 'wordpress-query-custom-posts';
 import stripTags from 'striptags';
 
 /**
@@ -21,12 +21,12 @@ import stripTags from 'striptags';
  */
 import Placeholder from 'components/placeholder';
 import PostList from './list';
-import PostPreview from 'components/post/preview';
+// import PostPreview from 'components/post/preview';
 
 function Doodles( props ) {
-	if ( !! props.previewId ) {
-		return <PostPreview id={ props.previewId } />;
-	}
+	// if ( !! props.previewId ) {
+	// 	return <PostPreview id={ props.previewId } />;
+	// }
 
 	const posts = props.posts;
 	const meta = {
@@ -35,14 +35,14 @@ function Doodles( props ) {
 		canonical: FoxhoundSettings.URL.base,
 	};
 
-	console.log( posts );
+	// console.log( props );
 
 	return (
 		<div className="site-content">
 			<DocumentMeta { ...meta } />
-			<BodyClass classes={ [ 'doodles' ] } />
+			<BodyClass classes={ [ 'posts' ] } />
 			<QueryPosts postType={ 'doodles' } query={ props.query } />
-			{ props.loading ? <Placeholder type="posts" /> : <PostList posts={ posts } /> }
+			{ props.loading ? <Placeholder /> : <PostList posts={ posts } /> }
 		</div>
 	);
 }
@@ -53,15 +53,20 @@ export default connect( ( state, { match, location } ) => {
 	query.page = match.params.paged || 1;
 
 	let path = FoxhoundSettings.URL.path || '/';
-	if ( FoxhoundSettings.frontPage.page ) {
-		path += 'page/' + FoxhoundSettings.frontPage.blog + '/';
-	}
+	// if ( FoxhoundSettings.frontPage.page ) {
+	// 	// path += 'page/' + FoxhoundSettings.frontPage.blog + '/'; // from current theme
+	// 	path += FoxhoundSettings.frontPage.blog + '/'; // from from fh-dos
+	// }
+	path += 'posts/';
+	// console.log( match );
 
 	const posts = getPostsForQuery( state, query ) || [];
 	const requesting = isRequestingPostsForQuery( state, query );
 
 	const urlQuery = qs.parse( location.search.replace( '?', '' ) );
 	const previewId = urlQuery.p || urlQuery.page_id || null;
+
+	// console.log( urlQuery );
 
 	return {
 		previewId,

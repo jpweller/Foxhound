@@ -1,64 +1,64 @@
-/*global FoxhoundSettings */
-// External dependencies
+/** @format */
+/**
+ * External Dependencies
+ */
 import React from 'react';
+import BodyClass from 'react-body-class';
 import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
-import BodyClass from 'react-body-class';
-import he from 'he';
-
-// Internal dependencies
-import QueryDoodles from 'wordpress-query-custom-posts-doodles';
 import {
-	isRequestingDoodlesForQuery,
 	getDoodlesForQuery,
 	getTotalPagesForQuery,
-} from 'wordpress-query-custom-posts-doodles/lib/selectors';
+	isRequestingDoodlesForQuery,
+} from 'wordpress-query-doodles/lib/selectors';
+import he from 'he';
+import qs from 'qs';
+import QueryDoodles from 'wordpress-query-doodles';
+import stripTags from 'striptags';
 
-// Components
-import DoodleList from './list';
-import DoodlePreview from 'components/doodle/preview';
+/**
+ * Internal Dependencies
+ */
 import Placeholder from 'components/placeholder';
+import DoodleList from './list';
 
-class DoodleIndex extends React.Component {
-	render() {
-		if ( !! this.props.previewId ) {
-			return (
-				<DoodlePreview id={ this.props.previewId } />
-			);
-		}
+function Doodles( props ) {
+	const doodles = props.doodles;
+	const meta = {
+		title: he.decode( FoxhoundSettings.meta.title ),
+		description: he.decode( stripTags( FoxhoundSettings.meta.description ) ),
+		canonical: FoxhoundSettings.URL.base,
+	};
 
-		const doodles = this.props.doodles;
-		const meta = {
-			title: he.decode( FoxhoundSettings.meta.title ),
-			description: FoxhoundSettings.meta.description,
-			canonical: FoxhoundSettings.URL.base,
-		};
+	console.log( props );
 
-		return (
-			<div className="site-content">
-				<DocumentMeta { ...meta } />
-				<BodyClass classes={ [ 'doodles' ] } />
-				<QueryDoodles query={ this.props.query } />
-
-				{ this.props.loading ? <Placeholder type="doodles" /> : <DoodleList doodles={ doodles } /> }
-
-			</div>
-		);
-	}
+	return (
+		<div className="site-content">
+			<DocumentMeta { ...meta } />
+			<BodyClass classes={ [ 'doodles' ] } />
+			<QueryDoodles query={ props.query } />
+			{ props.loading ? <Placeholder /> : <DoodleList doodles={ doodles } /> }
+		</div>
+	);
 }
 
-export default connect( ( state, ownProps ) => {
+export default connect( ( state, { match, location } ) => {
 	const query = {};
-	query.page = ownProps.params.paged || 1;
+	query.sticky = false;
+	query.page = match.params.paged || 1;
 
 	let path = FoxhoundSettings.URL.path || '/';
-	if ( FoxhoundSettings.frontPage.page ) {
-		path += FoxhoundSettings.frontPage.blog + '/';
-	}
+	// if ( FoxhoundSettings.frontPage.page ) {
+	// 	// path += 'page/' + FoxhoundSettings.frontPage.blog + '/'; // from current theme
+	// 	path += FoxhoundSettings.frontPage.blog + '/'; // from from fh-dos
+	// }
+	path += 'doodles/';
 
 	const doodles = getDoodlesForQuery( state, query ) || [];
 	const requesting = isRequestingDoodlesForQuery( state, query );
-	const previewId = ownProps.location.query.p || ownProps.location.query.page_id;
+
+	const urlQuery = qs.parse( location.search.replace( '?', '' ) );
+	const previewId = urlQuery.p || urlQuery.page_id || null;
 
 	return {
 		previewId,
@@ -70,4 +70,4 @@ export default connect( ( state, ownProps ) => {
 		loading: requesting && ! doodles.length,
 		totalPages: getTotalPagesForQuery( state, query ),
 	};
-} )( DoodleIndex );
+} )( Doodles );

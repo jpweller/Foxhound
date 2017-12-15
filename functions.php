@@ -67,9 +67,9 @@ function foxhound_setup() {
 	 * to output valid HTML5.
 	 */
 	add_theme_support( 'html5', array(
-		'search-form',
-		'comment-form',
-		'comment-list',
+		// 'search-form',
+		// 'comment-form',
+		// 'comment-list',
 		'gallery',
 		'caption',
 	) );
@@ -81,18 +81,18 @@ add_action( 'after_setup_theme', 'foxhound_setup' );
  *
  * @link http://codex.wordpress.org/Function_Reference/register_sidebar
  */
-function foxhound_widgets_init() {
-	register_sidebar( array(
-		'name'          => __( 'Sidebar', 'foxhound' ),
-		'id'            => 'sidebar-1',
-		'description'   => '',
-		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</aside>',
-		'before_title'  => '<h3 class="widget-title">',
-		'after_title'   => '</h3>',
-	) );
-}
-add_action( 'widgets_init', 'foxhound_widgets_init' );
+// function foxhound_widgets_init() {
+// 	register_sidebar( array(
+// 		'name'          => __( 'Sidebar', 'foxhound' ),
+// 		'id'            => 'sidebar-1',
+// 		'description'   => '',
+// 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+// 		'after_widget'  => '</aside>',
+// 		'before_title'  => '<h3 class="widget-title">',
+// 		'after_title'   => '</h3>',
+// 	) );
+// }
+// add_action( 'widgets_init', 'foxhound_widgets_init' );
 
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
@@ -101,10 +101,10 @@ add_action( 'widgets_init', 'foxhound_widgets_init' );
  *
  * @global int $content_width
  */
-function foxhound_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'foxhound_content_width', 635 );
-}
-add_action( 'after_setup_theme', 'foxhound_content_width', 0 );
+// function foxhound_content_width() {
+// 	$GLOBALS['content_width'] = apply_filters( 'foxhound_content_width', 635 );
+// }
+// add_action( 'after_setup_theme', 'foxhound_content_width', 0 );
 
 /**
  * Enqueue scripts and styles.
@@ -265,7 +265,7 @@ function foxhound_add_path_to_page_query( $args, $request ) {
 add_filter( 'rest_page_query', 'foxhound_add_path_to_page_query', 10, 2 );
 
 // Allow anon comments via API when using this theme.
-add_filter( 'rest_allow_anonymous_comments', '__return_true' );
+// add_filter( 'rest_allow_anonymous_comments', '__return_true' );
 
 // Include extra functionality.
 require get_template_directory() . '/inc/load-menu.php';
@@ -275,12 +275,12 @@ require get_template_directory() . '/inc/customizer.php';
 
 
 /*
-* Creating a function to create our CPT
+*  Define Doodles custom posts
 */
  
 function custom_post_type() {
  
-// Set UI labels for Custom Post Type
+	// Set UI labels for Custom Post Type
     $labels = array(
         'name'                => _x( 'Doodles', 'Post Type General Name', 'twentythirteen' ),
         'singular_name'       => _x( 'Doodle', 'Post Type Singular Name', 'twentythirteen' ),
@@ -297,8 +297,7 @@ function custom_post_type() {
         'not_found_in_trash'  => __( 'Not found in Trash', 'twentythirteen' ),
     );
      
-// Set other options for Custom Post Type
-     
+	// Set other options for Custom Post Type
     $args = array(
         'label'               => __( 'doodles', 'twentythirteen' ),
         'description'         => __( 'Fun, incomplete work', 'twentythirteen' ),
@@ -333,16 +332,25 @@ function custom_post_type() {
     register_post_type( 'doodles', $args );
  
 }
- 
-/* Hook into the 'init' action so that the function
-* Containing our post type registration is not 
-* unnecessarily executed. 
-*/
- 
 add_action( 'init', 'custom_post_type', 0 );
 
-
+/*
+*  Remove Comments from theme dashboard
+*/
 function custom_menu_page_removing() {
     remove_menu_page( 'edit-comments.php' );
 }
 add_action( 'admin_menu', 'custom_menu_page_removing' );
+
+
+/*
+*  Load all posts at once
+*/
+function set_posts_per_page( $query ) {
+	// global $wp_the_query;
+
+	$query->set( 'posts_per_page', 500 );
+
+	// return $query;
+}
+add_action( 'pre_get_posts',  'set_posts_per_page'  );

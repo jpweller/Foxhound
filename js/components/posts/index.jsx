@@ -35,14 +35,14 @@ function Index( props ) {
 		canonical: FoxhoundSettings.URL.base,
 	};
 
-	console.log( posts );
+	// console.log( posts );
 
 	return (
 		<div className="site-content">
 			<DocumentMeta { ...meta } />
 			<BodyClass classes={ [ 'home', 'blog' ] } />
 			<QueryPosts query={ props.query } />
-			{ props.loading ? <Placeholder type="posts" /> : <PostList posts={ posts } /> }
+			{ props.loading ? <Placeholder /> : <PostList posts={ posts } /> }
 		</div>
 	);
 }

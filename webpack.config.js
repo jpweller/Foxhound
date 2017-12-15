@@ -63,7 +63,8 @@ webpackConfig = {
 	},
 	plugins: [
 		new LodashModuleReplacementPlugin( {
-			collections: true
+			collections: true,
+			shorthands: true // added for iteratee error in doodles
 		} ),
 		new webpack.DefinePlugin( {
 			// NODE_ENV is used inside React to enable/disable features that should only

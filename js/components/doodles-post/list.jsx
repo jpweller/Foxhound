@@ -33,6 +33,8 @@ class PostList extends React.Component {
 			return null;
 		}
 
+		// console.log( this.props );
+
 		return (
 			<article className="entry">
 				<h2 className="entry-title">Nothing Found</h2>

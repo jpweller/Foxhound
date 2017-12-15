@@ -1,3 +1,4 @@
+/** @format */
 export const data = {
 	doodles: {
 		items: {
@@ -5,11 +6,11 @@ export const data = {
 				id: 1,
 				type: 'doodle',
 				title: {
-					rendered: 'WordPress Query Component Tests'
+					rendered: 'WordPress Query Component Tests',
 				},
 				excerpt: {
 					rendered: 'excerpt',
-					protected: false
+					protected: false,
 				},
 				link: 'https://wpapi.local/2016/10/wordpress-query-component-tests',
 			},
@@ -17,14 +18,14 @@ export const data = {
 				id: 2,
 				type: 'doodle',
 				title: {
-					rendered: 'Another Test Doodle'
+					rendered: 'Another Test Doodle',
 				},
 				excerpt: {
 					rendered: 'excerpt',
-					protected: false
+					protected: false,
 				},
 				link: 'https://wpapi.local/2016/11/another-test-doodle',
-			}
+			},
 		},
 		totalPages: {
 			'{"sticky":false,"page":1}': '2',
@@ -34,6 +35,6 @@ export const data = {
 		},
 		queries: {
 			'{"sticky":false,"page":1}': [ 1, 2 ],
-		}
-	}
-}
+		},
+	},
+};

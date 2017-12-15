@@ -6,7 +6,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import LazyLoad from 'react-lazy-load';
 
-export default class DoodleMedia extends React.Component {
+export default class PostMedia extends React.Component {
 	constructor( props, context ) {
 		super( props, context );
 

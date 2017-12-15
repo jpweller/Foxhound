@@ -1,29 +1,23 @@
-// External dependencies
+/** @format */
+/**
+ * External Dependencies
+ */
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// Internal dependencies
+/**
+ * Internal Dependencies
+ */
 import Doodle from './single';
 
-export default class DoodleList extends React.Component {
-	static propTypes = {
-		doodles: PropTypes.array.isRequired,
-		shouldShowEmpty: PropTypes.bool,
-		error: PropTypes.string,
-	};
-
-	static defaultProps = {
-		shouldShowEmpty: true,
-		error: 'It seems we can’t find what you’re looking for. Perhaps searching can help.',
-	};
-
-	renderDoodles() {
+class DoodleList extends React.Component {
+	renderDoodles = () => {
 		return this.props.doodles.map( ( doodle, i ) => {
-			return <Doodle key={ 'doodle-' + i } { ...doodle } />
+			return <Doodle key={ 'doodle-' + i } { ...doodle } />;
 		} );
-	}
+	};
 
-	renderEmpty() {
+	renderEmpty = () => {
 		if ( ! this.props.shouldShowEmpty ) {
 			return null;
 		}
@@ -36,10 +30,10 @@ export default class DoodleList extends React.Component {
 					<p>{ this.props.error }</p>
 				</div>
 
-				<div className="entry-meta"></div>
+				<div className="entry-meta" />
 			</article>
-		)
-	}
+		);
+	};
 
 	render() {
 		if ( ! this.props.doodles ) {
@@ -48,11 +42,21 @@ export default class DoodleList extends React.Component {
 
 		return (
 			<div className="site-main">
-				{ this.props.doodles.length ?
-					this.renderDoodles() :
-					this.renderEmpty()
-				}
+				{ this.props.doodles.length ? this.renderDoodles() : this.renderEmpty() }
 			</div>
 		);
 	}
 }
+
+DoodleList.propTypes = {
+	doodles: PropTypes.array.isRequired,
+	shouldShowEmpty: PropTypes.bool,
+	error: PropTypes.string,
+};
+
+DoodleList.defaultProps = {
+	shouldShowEmpty: true,
+	error: 'It seems we can’t find what you’re looking for. Perhaps searching can help.',
+};
+
+export default DoodleList;

@@ -5,14 +5,14 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { routerReducer, LOCATION_CHANGE } from 'react-router-redux';
 import posts from 'wordpress-query-posts/lib/state';
+import doodles from 'wordpress-query-doodles/lib/state';
 import pages from 'wordpress-query-page/lib/state';
 import terms from 'wordpress-query-term/lib/state';
-// import comments from 'wordpress-query-comments/lib/state';
 import menu from 'wordpress-query-menu/lib/state';
 // import media from 'wordpress-query-media/lib/state';
 // import users from 'wordpress-query-user/lib/state';
 
-const reducer = combineReducers( { posts, pages, terms, menu, routing: routerReducer } );
+const reducer = combineReducers( { posts, doodles, pages, terms, menu, routing: routerReducer } );
 
 // Add the event Jetpack listens for to initialize various JS features on posts.
 const emitJetpackEvent = () => next => action => {

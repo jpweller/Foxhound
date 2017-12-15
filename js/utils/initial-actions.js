@@ -6,7 +6,7 @@ import {
 	POSTS_RECEIVE,
 	POSTS_REQUEST_SUCCESS,
 	POST_REQUEST_SUCCESS,
-} from 'wordpress-query-posts/lib/state';
+} from 'wordpress-query-custom-posts/lib/state';
 import { PAGE_REQUEST_SUCCESS } from 'wordpress-query-page/lib/state';
 
 /**

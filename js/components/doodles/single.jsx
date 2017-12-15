@@ -1,31 +1,27 @@
-/*global FoxhoundSettings */
-// External dependencies
+/** @format */
+/**
+ * External Dependencies
+ */
 import React from 'react';
-import classNames from 'classnames';
-import { Link } from 'react-router';
 
-// Internal dependencies
-import ContentMixin from 'utils/content-mixin';
-import Media from './image';
+/**
+ * Internal Dependencies
+ */
+import { getFeaturedMedia } from 'utils/content';
+import DoodleMedia from './image';
 
-export default class Doodle extends React.Component {
+export default function Doodle( props ) {
+	const doodle = props;
 
-	render() {
-		let doodle = this.props;
+	const featuredMedia = getFeaturedMedia( doodle );
 
-		if ( 'attachment' === doodle.type ) {
-			return null;
-		}
-
-		const featuredMedia = ContentMixin.getFeaturedMedia( doodle );
-
-		return (
-			<div id={ `doodle-${doodle.id}` } className='doodle'>
-				{ featuredMedia ?
-					<Media media={ featuredMedia } parentClass='doodle-image' altText={ doodle.title.rendered }/> :
-					null
-				}
-			</div>
-		);
+	if ( ! featuredMedia ) {
+		return null;
 	}
+
+	return (
+		<div id={ `doodle-${ doodle.id }` } className="doodle" >
+			<DoodleMedia media={ featuredMedia } parentClass="doodle-image" altText={ doodle.title.rendered } />
+		</div>
+	);
 }

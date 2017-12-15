@@ -7,7 +7,11 @@ import BodyClass from 'react-body-class';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
-import { getPost, getPostIdFromSlug, isRequestingPost } from 'wordpress-query-posts/lib/selectors';
+import {
+	getPost,
+	getPostIdFromSlug,
+	isRequestingPost,
+} from 'wordpress-query-posts/lib/selectors';
 import he from 'he';
 import qs from 'qs';
 import QueryPosts from 'wordpress-query-posts';
@@ -16,7 +20,12 @@ import stripTags from 'striptags';
 /**
  * Internal Dependencies
  */
-import { getContent, getDate, getFeaturedMedia, getTitle } from 'utils/content';
+import {
+	getContent,
+	getDate,
+	getFeaturedMedia,
+	getTitle,
+} from 'utils/content';
 import Media from './image';
 import Placeholder from 'components/placeholder';
 import PostMeta from './meta';

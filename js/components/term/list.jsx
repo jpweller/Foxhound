@@ -5,12 +5,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { isEqual } from 'lodash';
-import QueryPosts from 'wordpress-query-posts';
+import QueryPosts from 'wordpress-query-custom-posts';
 import {
 	isRequestingPostsForQuery,
 	getPostsForQuery,
 	getTotalPagesForQuery,
-} from 'wordpress-query-posts/lib/selectors';
+} from 'wordpress-query-custom-posts/lib/selectors';
 
 /**
  * Internal Dependencies

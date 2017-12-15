@@ -1,34 +1,49 @@
+/** @format */
+/**
+ * External Dependencies
+ */
 import React from 'react';
-import { Provider } from 'react-redux';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
+import { Provider } from 'react-redux';
+import sinon from 'sinon';
+import * as router from 'react-router-dom';
 
-// Internal
+/**
+ * Internal Dependencies
+ */
 import { mockStore } from 'test/mock-store';
 import { data } from './fixtures/store';
-import Index from '../';
+import Doodles from '../';
 
-describe( 'Index', function() {
-	let RenderedIndex;
+describe( 'Doodles', function() {
+	let RenderedDoodles;
+	let wrapper;
 
 	beforeEach( () => {
 		const store = mockStore( data );
+		sinon.stub( router, 'Link' ).returns( <span /> );
 
-		// Pass through `params` & `location`, which would come from react-router
-		const wrapper = mount(
+		// Pass through `match` & `location`, which would come from react-router
+		wrapper = mount(
 			<Provider store={ store }>
-				<Index params={ {} } location={ { query: {} } } />
+				<Doodles match={ { params: {} } } location={ { search: '' } } />
 			</Provider>
 		);
 
-		RenderedIndex = wrapper.find( Index );
+		RenderedDoodles = wrapper.find( Doodles );
 	} );
 
-	it( 'should load an index component', function() {
-		expect( RenderedIndex.length ).to.equal( 1 );
+	afterEach( () => {
+		router.Link.restore();
+		wrapper.unmount();
+	} );
+
+	it( 'should load an Doodles component', function() {
+		expect( RenderedDoodles.length ).to.equal( 1 );
 	} );
 
 	it( 'should contain two doodles', function() {
-		expect( RenderedIndex.find( '.entry' ).length ).to.equal( 2 );
+		expect( RenderedDoodles.find( '.entry' ).length ).to.equal( 2 );
 	} );
 } );

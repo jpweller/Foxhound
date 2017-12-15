@@ -14,10 +14,10 @@ import * as router from 'react-router-dom';
  */
 import { mockStore } from 'test/mock-store';
 import { data } from './fixtures/store';
-import Index from '../';
+import Posts from '../';
 
-describe( 'Index', function() {
-	let RenderedIndex;
+describe( 'Posts', function() {
+	let RenderedPosts;
 	let wrapper;
 
 	beforeEach( () => {
@@ -27,11 +27,11 @@ describe( 'Index', function() {
 		// Pass through `match` & `location`, which would come from react-router
 		wrapper = mount(
 			<Provider store={ store }>
-				<Index match={ { params: {} } } location={ { search: '' } } />
+				<Posts match={ { params: {} } } location={ { search: '' } } />
 			</Provider>
 		);
 
-		RenderedIndex = wrapper.find( Index );
+		RenderedPosts = wrapper.find( Posts );
 	} );
 
 	afterEach( () => {
@@ -39,11 +39,11 @@ describe( 'Index', function() {
 		wrapper.unmount();
 	} );
 
-	it( 'should load an index component', function() {
-		expect( RenderedIndex.length ).to.equal( 1 );
+	it( 'should load an posts component', function() {
+		expect( RenderedPosts.length ).to.equal( 1 );
 	} );
 
 	it( 'should contain two posts', function() {
-		expect( RenderedIndex.find( '.entry' ).length ).to.equal( 2 );
+		expect( RenderedPosts.find( '.entry' ).length ).to.equal( 2 );
 	} );
 } );
