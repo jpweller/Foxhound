@@ -1,10 +1,10 @@
 /** @format */
 export const data = {
-	posts: {
+	doodles: {
 		items: {
 			1: {
 				id: 1,
-				type: 'post',
+				type: 'doodle',
 				title: {
 					rendered: 'WordPress Query Component Tests',
 				},
@@ -16,15 +16,15 @@ export const data = {
 			},
 			2: {
 				id: 2,
-				type: 'post',
+				type: 'doodle',
 				title: {
-					rendered: 'Another Test Post',
+					rendered: 'Another Test Doodle',
 				},
 				excerpt: {
 					rendered: 'excerpt',
 					protected: false,
 				},
-				link: 'https://wpapi.local/2016/11/another-test-post',
+				link: 'https://wpapi.local/2016/11/another-test-doodle',
 			},
 		},
 		totalPages: {

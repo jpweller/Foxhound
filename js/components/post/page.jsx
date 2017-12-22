@@ -20,7 +20,11 @@ import stripTags from 'striptags';
 /**
  * Internal Dependencies
  */
-import { getContent, getFeaturedMedia, getTitle } from 'utils/content';
+import {
+	getContent,
+	getFeaturedMedia,
+	getTitle,
+} from 'utils/content';
 import Media from './image';
 import Placeholder from 'components/placeholder';
 import PostPreview from './preview';
@@ -73,9 +77,27 @@ class SinglePage extends React.Component {
 }
 
 export default connect( ( state, { match, location, slug = false } ) => {
+	console.log( match, location, slug );
+
+	// from foxthound but returns false
 	let path = match.params[ 0 ] || slug;
+
+	// added because match.params was null
+	path = location.pathname;
+
+	// added because route wasn't sending slug
+	if ( location.pathname === match.path ) {
+		path = FoxhoundSettings.frontPage.page;
+	}
+
+	// from foxthound page.jsx 2.0.0-alpha
 	if ( '/' === path[ path.length - 1 ] ) {
 		path = path.slice( 0, -1 );
+	}
+
+	// from foxthound page.jsx 1.0.3
+	if ( path.indexOf( '/' ) > -1 ) {
+		path = path.slice( path.lastIndexOf( '/' ) );
 	}
 
 	const postId = getPageIdFromPath( state, path );

@@ -14,10 +14,10 @@ import * as router from 'react-router-dom';
  */
 import { mockStore } from 'test/mock-store';
 import { data } from './fixtures/store';
-import Posts from '../';
+import Doodles from '../';
 
-describe( 'Posts', function() {
-	let RenderedPosts;
+describe( 'Doodles', function() {
+	let RenderedDoodles;
 	let wrapper;
 
 	beforeEach( () => {
@@ -27,11 +27,11 @@ describe( 'Posts', function() {
 		// Pass through `match` & `location`, which would come from react-router
 		wrapper = mount(
 			<Provider store={ store }>
-				<Posts match={ { params: {} } } location={ { search: '' } } />
+				<Doodles match={ { params: {} } } location={ { search: '' } } />
 			</Provider>
 		);
 
-		RenderedPosts = wrapper.find( Posts );
+		RenderedDoodles = wrapper.find( Doodles );
 	} );
 
 	afterEach( () => {
@@ -39,11 +39,11 @@ describe( 'Posts', function() {
 		wrapper.unmount();
 	} );
 
-	it( 'should load an posts component', function() {
-		expect( RenderedPosts.length ).to.equal( 1 );
+	it( 'should load an Doodles component', function() {
+		expect( RenderedDoodles.length ).to.equal( 1 );
 	} );
 
-	it( 'should contain two posts', function() {
-		expect( RenderedPosts.find( '.entry' ).length ).to.equal( 2 );
+	it( 'should contain two doodles', function() {
+		expect( RenderedDoodles.find( '.entry' ).length ).to.equal( 2 );
 	} );
 } );

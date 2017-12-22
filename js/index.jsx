@@ -29,7 +29,7 @@ import Index from 'components/posts';
 import Navigation from 'components/navigation';
 import NotFound from 'components/not-found';
 import SinglePage from 'components/post/page';
-import Doodles from 'components/doodles';
+import Doodles from 'components/doodles-all';
 // import SingleDoodle from 'components/doodle';
 import SinglePost from 'components/post';
 import Term from 'components/term';
@@ -43,10 +43,11 @@ const history = createHistory();
 const path = FoxhoundSettings.URL.path || '/';
 
 function renderApp() {
+	// console.log( FoxhoundSettings.frontPage.page );
 	let blogURL, frontPageRoute;
 	if ( FoxhoundSettings.frontPage.page ) {
 		blogURL = path + FoxhoundSettings.frontPage.blog + '/';
-		frontPageRoute = <Route path={ path } slug={ FoxhoundSettings.frontPage.page } component={ SinglePage } />;
+		frontPageRoute = <Route path={ path } exact slug={ FoxhoundSettings.frontPage.page } component={ SinglePage } />;
 	} else {
 		blogURL = path;
 		frontPageRoute = null;
@@ -61,17 +62,18 @@ function renderApp() {
 		<ScrollToTop>
 			<Switch>
 				<Route path={ blogURL } exact component={ Index } />
+				{ frontPageRoute }
 				<Route path={ `${ path }doodles/` } component={ Doodles } />
 				<Route path={ `${ path }category/:slug` } component={ getTermComponent( 'category' ) } />
 				<Route path={ `${ path }tag/:slug` } component={ getTermComponent( 'post_tag' ) } />
 				<Route path={ `${ path }about` } component={ SinglePage } />
 				<Route path={ `${ path }:slug` } component={ SinglePost } />
-				{ frontPageRoute }
 				<Route path="*" component={ NotFound } />
 			</Switch>
 		</ScrollToTop>
 	);
 
+	// console.log( routes );
 	render(
 		<Provider store={ store }>
 			<ConnectedRouter history={ history }>{ routes }</ConnectedRouter>

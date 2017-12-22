@@ -7,42 +7,35 @@ import BodyClass from 'react-body-class';
 import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import {
-	getPostsForQuery,
+	getDoodlesForQuery,
 	getTotalPagesForQuery,
-	isRequestingPostsForQuery,
-} from 'wordpress-query-custom-posts/lib/selectors';
+	isRequestingDoodlesForQuery,
+} from 'wordpress-query-doodles/lib/selectors';
 import he from 'he';
 import qs from 'qs';
-import QueryPosts from 'wordpress-query-custom-posts';
+import QueryDoodles from 'wordpress-query-doodles';
 import stripTags from 'striptags';
 
 /**
  * Internal Dependencies
  */
 import Placeholder from 'components/placeholder';
-import PostList from './list';
-// import PostPreview from 'components/post/preview';
+import DoodleList from './list';
 
 function Doodles( props ) {
-	// if ( !! props.previewId ) {
-	// 	return <PostPreview id={ props.previewId } />;
-	// }
-
-	const posts = props.posts;
+	const doodles = props.doodles;
 	const meta = {
 		title: he.decode( FoxhoundSettings.meta.title ),
 		description: he.decode( stripTags( FoxhoundSettings.meta.description ) ),
 		canonical: FoxhoundSettings.URL.base,
 	};
 
-	// console.log( props );
-
 	return (
 		<div className="site-content">
 			<DocumentMeta { ...meta } />
-			<BodyClass classes={ [ 'posts' ] } />
-			<QueryPosts postType={ 'doodles' } query={ props.query } />
-			{ props.loading ? <Placeholder /> : <PostList posts={ posts } /> }
+			<BodyClass classes={ [ 'doodles' ] } />
+			<QueryDoodles query={ props.query } />
+			{ props.loading ? <Placeholder /> : <DoodleList doodles={ doodles } /> }
 		</div>
 	);
 }
@@ -57,25 +50,22 @@ export default connect( ( state, { match, location } ) => {
 	// 	// path += 'page/' + FoxhoundSettings.frontPage.blog + '/'; // from current theme
 	// 	path += FoxhoundSettings.frontPage.blog + '/'; // from from fh-dos
 	// }
-	path += 'posts/';
-	// console.log( match );
+	path += 'doodles/';
 
-	const posts = getPostsForQuery( state, query ) || [];
-	const requesting = isRequestingPostsForQuery( state, query );
+	const doodles = getDoodlesForQuery( state, query ) || [];
+	const requesting = isRequestingDoodlesForQuery( state, query );
 
 	const urlQuery = qs.parse( location.search.replace( '?', '' ) );
 	const previewId = urlQuery.p || urlQuery.page_id || null;
-
-	// console.log( urlQuery );
 
 	return {
 		previewId,
 		path,
 		page: parseInt( query.page ),
 		query,
-		posts,
+		doodles,
 		requesting,
-		loading: requesting && ! posts.length,
+		loading: requesting && ! doodles.length,
 		totalPages: getTotalPagesForQuery( state, query ),
 	};
 } )( Doodles );

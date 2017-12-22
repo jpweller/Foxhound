@@ -344,13 +344,23 @@ add_action( 'admin_menu', 'custom_menu_page_removing' );
 
 
 /*
+*  Kill jQuery migrate
+*/
+add_action( 'wp_default_scripts', function( $scripts ) {
+    if ( ! empty( $scripts->registered['jquery'] ) ) {
+        $scripts->registered['jquery']->deps = array_diff( $scripts->registered['jquery']->deps, array( 'jquery-migrate' ) );
+    }
+} );
+
+
+/*
 *  Load all posts at once
 */
-function set_posts_per_page( $query ) {
-	// global $wp_the_query;
+// function set_posts_per_page( $query ) {
+// 	// global $wp_the_query;
 
-	$query->set( 'posts_per_page', 500 );
+// 	$query->set( 'posts_per_page', 500 );
 
-	// return $query;
-}
-add_action( 'pre_get_posts',  'set_posts_per_page'  );
+// 	// return $query;
+// }
+// add_action( 'pre_get_posts',  'set_posts_per_page'  );
