@@ -59,37 +59,3 @@ small {
 big {
 	font-size: 125%;
 }
-
-.entry-content table {
-	th, td {
-		padding: 3px 5px;
-	}
-
-	th {
-		text-align: left;
-	}
-}
-
-.entry-meta,
-.entry-footer,
-.comment-metadata,
-.comment-form-field label,
-.search-form-field label,
-.contact-form label,
-.site-footer {
-	font-family: $font__meta;
-	font-weight: $font__weight-bold;
-	@include font-size( $font__size-meta );
-	text-transform: lowercase;
-	line-height: 1.25;
-	letter-spacing: 1.6px;
-	color: $blue;
-}
-
-.comment-author {
-	@include font-size( 18 );
-}
-
-.widget {
-	@include font-size( 16 );
-}

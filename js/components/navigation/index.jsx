@@ -96,6 +96,11 @@ class Navigation extends React.Component {
 			'menu-open': this.state.isMenuOpen,
 		} );
 
+		// <a id="menu-toggle" href="#primary-menu" aria-expanded={ !! this.state.isMenuOpen } onClick={ this.toggleMenu }>
+		// 	<div class="burger"></div>
+		// 	<span class="screen-reader-text">Menu</span>
+		// </a>
+
 		return (
 			<div className={ menuClasses }>
 				<div className="menu-toggle" onClick={ this.toggleMenu }>
@@ -103,9 +108,11 @@ class Navigation extends React.Component {
 						Menu
 					</button>
 				</div>
-				<ul className="menu nav-menu" aria-expanded={ !! this.state.isMenuOpen }>
-					{ menu }
-				</ul>
+				<div class="menu-main-menu-container">
+					<ul id="primary-menu" className="menu nav-menu" aria-expanded={ !! this.state.isMenuOpen }>
+						{ menu }
+					</ul>
+				</div>
 			</div>
 		);
 	}

@@ -29,13 +29,16 @@ import Index from 'components/posts';
 import Navigation from 'components/navigation';
 import NotFound from 'components/not-found';
 import SinglePage from 'components/post/page';
-import Doodles from 'components/doodles-all';
+import Doodles from 'components/doodles';
 // import SingleDoodle from 'components/doodle';
 import SinglePost from 'components/post';
 import Term from 'components/term';
 
 // Accessibility!
-import { skipLink, toggleFocus } from 'utils/a11y';
+import {
+	skipLink,
+	toggleFocus,
+} from 'utils/a11y';
 
 // Now the work starts.
 const store = createReduxStore();
@@ -94,7 +97,20 @@ function renderApp() {
 	}
 }
 
-// Initialize keyboard functionality with JS for non-react-build Menus (if the API doesn't exist)
+// const button = document.getElementById( 'menu-toggle' );
+// 	button.addEventListener( 'click', function( e ) {
+// 		if ( -1 !== menu.className.indexOf( 'menu-open' ) ) {
+// 			menu.className = menu.className.replace( ' menu-open', '' );
+// 			menu.setAttribute( 'aria-expanded', 'false' );
+// 			button.setAttribute( 'aria-expanded', 'false' );
+// 		} else {
+// 			menu.className += ' menu-open';
+// 			menu.setAttribute( 'aria-expanded', 'true' );
+// 			button.setAttribute( 'aria-expanded', 'true' );
+// 		}
+// 		e.preventDefault();
+// 	} );
+
 function initNoApiMenuFocus() {
 	const container = document.getElementById( 'site-navigation' );
 	if ( ! container ) {
@@ -107,26 +123,32 @@ function initNoApiMenuFocus() {
 		return;
 	}
 
+	const button = container.getElementsByTagName( 'button' )[ 0 ];
+
+	const closeMenu = function() {
+		container.className = container.className.replace( ' menu-open', '' );
+		menu.setAttribute( 'aria-expanded', 'false' );
+		button.setAttribute( 'aria-expanded', 'false' );
+	};
+
+	button.onclick = function() {
+		if ( -1 !== container.className.indexOf( 'menu-open' ) ) {
+			closeMenu();
+		} else {
+			container.className += ' menu-open';
+			menu.setAttribute( 'aria-expanded', 'true' );
+			button.setAttribute( 'aria-expanded', 'true' );
+		}
+	};
+
 	const links = menu.getElementsByTagName( 'a' );
 	// Each time a menu link is focused or blurred, toggle focus.
 	let i, len;
 	for ( i = 0, len = links.length; i < len; i++ ) {
 		links[ i ].addEventListener( 'focus', toggleFocus, true );
 		links[ i ].addEventListener( 'blur', toggleFocus, true );
+		links[ i ].addEventListener( 'click', closeMenu, true );
 	}
-
-	const button = container.getElementsByTagName( 'button' )[ 0 ];
-	button.onclick = function() {
-		if ( -1 !== menu.className.indexOf( 'menu-open' ) ) {
-			menu.className = menu.className.replace( ' menu-open', '' );
-			menu.setAttribute( 'aria-expanded', 'false' );
-			button.setAttribute( 'aria-expanded', 'false' );
-		} else {
-			menu.className += ' menu-open';
-			menu.setAttribute( 'aria-expanded', 'true' );
-			button.setAttribute( 'aria-expanded', 'true' );
-		}
-	};
 }
 
 // Set up link capture on all links in the app context.

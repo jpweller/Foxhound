@@ -7,20 +7,6 @@ h3, h4, h5, h6 {
 	font-weight: $font__weight-black;
 }
 
-.site-title {
-	margin: 0;
-	font-weight: $font__weight-black;
-	@include font-size( 36 );
-	font-style: italic;
-	color: $blue;
-
-	a {
-		&:focus {
-			text-decoration: underline;
-		}
-	}
-}
-
 .page-title,
 .entry-title,
 .comments-title,

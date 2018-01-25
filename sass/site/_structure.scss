@@ -2,12 +2,10 @@
    Site structure
 --------------------------------------------------------------*/
 .site {
-	margin: 0 auto;
-	padding: 0 15px;
-	max-width: $size__site-container;
-
-	@include breakpoint( '<660px' ) {
-		padding: 0 25px;
+	margin: 64px 0;
+	
+	@include breakpoint( '>660px' ) {
+		margin: 64px;
 	}
 }
 
@@ -16,15 +14,15 @@
 	outline: none;
 }
 
-// Hide Jetpack's sharing/like buttons on the blog
-.sharedaddy {
-	display: none !important;
+// // Hide Jetpack's sharing/like buttons on the blog
+// .sharedaddy {
+// 	display: none !important;
 
-	body.single & {
-		display: block !important;
-	}
+// 	body.single & {
+// 		display: block !important;
+// 	}
 
-	.sd-sharing {
-		padding-left: 2px;
-	}
-}
+// 	.sd-sharing {
+// 		padding-left: 2px;
+// 	}
+// }

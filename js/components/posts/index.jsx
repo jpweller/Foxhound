@@ -40,7 +40,7 @@ function Index( props ) {
 	return (
 		<div className="site-content">
 			<DocumentMeta { ...meta } />
-			<BodyClass classes={ [ 'home', 'blog' ] } />
+			<BodyClass classes={ [ 'work' ] } />
 			<QueryPosts query={ props.query } />
 			{ props.loading ? <Placeholder /> : <PostList posts={ posts } /> }
 		</div>

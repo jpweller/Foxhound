@@ -60,6 +60,7 @@ function foxhound_setup() {
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
 		'primary' => esc_html__( 'Primary Menu', 'foxhound' ),
+		// 'social' => esc_html__( 'Social Menu', 'foxhound' ),
 	) );
 
 	/*
@@ -351,16 +352,3 @@ add_action( 'wp_default_scripts', function( $scripts ) {
         $scripts->registered['jquery']->deps = array_diff( $scripts->registered['jquery']->deps, array( 'jquery-migrate' ) );
     }
 } );
-
-
-/*
-*  Load all posts at once
-*/
-// function set_posts_per_page( $query ) {
-// 	// global $wp_the_query;
-
-// 	$query->set( 'posts_per_page', 500 );
-
-// 	// return $query;
-// }
-// add_action( 'pre_get_posts',  'set_posts_per_page'  );

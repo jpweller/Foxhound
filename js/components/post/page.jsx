@@ -52,7 +52,7 @@ class SinglePage extends React.Component {
 		return (
 			<article id={ `post-${ post.id }` } className={ classes }>
 				<DocumentMeta { ...meta } />
-				<BodyClass classes={ [ 'page', 'single', 'single-page' ] } />
+				<BodyClass classes={ [ 'page', post.slug ] } />
 				<h1 className="entry-title" dangerouslySetInnerHTML={ getTitle( post ) } />
 				{ featuredMedia ? <Media media={ featuredMedia } parentClass="entry-image" /> : null }
 				<div className="entry-meta" />
@@ -77,10 +77,11 @@ class SinglePage extends React.Component {
 }
 
 export default connect( ( state, { match, location, slug = false } ) => {
-	console.log( match, location, slug );
+	// console.log( match, location, slug );
 
 	// from foxthound but returns false
 	let path = match.params[ 0 ] || slug;
+	console.warn( 'fix path match params' );
 
 	// added because match.params was null
 	path = location.pathname;

@@ -25,7 +25,7 @@ class Foxhound_LoadData {
 	 */
 	public function unstick_stickies( $query ) {
 		$query->set( 'ignore_sticky_posts', true );
-		$query->set( 'posts_per_page', 10 );
+		$query->set( 'posts_per_page', 500 );
 	}
 
 	/**
