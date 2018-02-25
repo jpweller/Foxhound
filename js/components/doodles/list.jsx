@@ -41,7 +41,7 @@ class DoodleList extends React.Component {
 		}
 
 		return (
-			<div className="site-main">
+			<div className="doodle-list">
 				{ this.props.doodles.length ? this.renderDoodles() : this.renderEmpty() }
 			</div>
 		);

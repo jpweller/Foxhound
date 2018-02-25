@@ -183,13 +183,14 @@ add_action( 'wp_enqueue_scripts', 'foxhound_scripts' );
  * @return string Font stylesheet or empty string if disabled.
  */
 function foxhound_fonts_url() {
-	$font_families[] = rawurlencode( 'Work+Sans:400,700' );
-	$protocol = is_ssl() ? 'https' : 'http';
-	$query_args = array(
-		'family' => implode( '|', $font_families ),
-		'subset' => rawurlencode( 'latin,latin-ext' ),
-	);
-	$fonts_url = add_query_arg( $query_args, "$protocol://fonts.googleapis.com/css" );
+	// $font_families[] = rawurlencode( 'Work+Sans:400,700' );
+	// $protocol = is_ssl() ? 'https' : 'http';
+	// $query_args = array(
+	// 	'family' => implode( '|', $font_families ),
+	// 	'subset' => rawurlencode( 'latin,latin-ext' ),
+	// );
+	// $fonts_url = add_query_arg( $query_args, "$protocol://fonts.googleapis.com/css" );
+	$fonts_url = "https://fonts.googleapis.com/css?family=Work+Sans";
 
 	return $fonts_url;
 }

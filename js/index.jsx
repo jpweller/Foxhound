@@ -167,7 +167,7 @@ function handleLinkClick() {
 	}
 	const escapedSiteURL = new RegExp( escapeRegExp( regexBaseUrl ).replace( /\//g, '\\/' ) );
 
-	jQuery( '#page' ).on( 'click', 'a[rel!=external][target!=_blank]', event => {
+	jQuery( 'body' ).on( 'click', 'a[rel!=external][target!=_blank]', event => {
 		// Don't capture clicks offsite
 		if ( ! escapedSiteURL.test( event.currentTarget.href ) ) {
 			return;
@@ -199,7 +199,7 @@ function handleLinkClick() {
 		history.push( url );
 	} );
 
-	jQuery( '#page' ).on( 'click', 'a[href^="#"]', event => {
+	jQuery( 'body' ).on( 'click', 'a[href^="#"]', event => {
 		skipLink( event.target );
 	} );
 }
@@ -218,12 +218,21 @@ function renderPreloadData() {
 }
 
 function logoHover() {
-	jQuery( '.logo path' ).bind( 'webkitAnimationEnd mozAnimationEnd animationend', function() {
-		jQuery( '.logo' ).removeClass( 'animated' );
-	} );
+	let canGo = true;
+	const delay = 1000;
+	const logoAnimate = function() {
+		if ( canGo ) {
+			canGo = false;
+			jQuery( '.logo animateTransform' )[ 0 ].beginElement();
+			jQuery( '.logo animate' )[ 0 ].beginElement();
+			setTimeout( function() {
+				canGo = true;
+			}, delay );
+		}
+	};
 
 	jQuery( '.logo' ).mouseenter( function() {
-		jQuery( this ).addClass( 'animated' );
+		logoAnimate();
 	} );
 }
 

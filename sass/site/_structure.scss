@@ -1,11 +1,15 @@
 /*--------------------------------------------------------------
    Site structure
 --------------------------------------------------------------*/
-.site {
-	margin: 64px 0;
+.site-main {
+	margin-top: 64px;
+	min-height: calc(100vh - 128px);
+	margin-bottom: -1px;
+	padding-bottom: 1px; // collapse margins
 	
 	@include breakpoint( '>660px' ) {
-		margin: 64px;
+		margin-left: 64px;
+		margin-right: 64px;
 	}
 }
 

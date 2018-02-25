@@ -1,8 +1,46 @@
-.placeholder-title {
-	padding-bottom: 2em;
+.spinner {
+	$size: 40px;
+
+	&:after,
+	&:before {
+		content: " ";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		display: block;
+		border-radius: 50%;
+		border: 4px solid $black;
+	}
+	&:before {
+		border-top: 4px solid transparent;
+		height: $size;
+		width: $size;
+		margin-left: -$size/2;
+		margin-top: -$size/2;
+		animation: 3s spinner linear infinite;
+	}
+	&:after {
+		border-right: 4px solid transparent;
+		$size: $size + 16px;
+		height: $size;
+		width: $size;
+		margin-left: -$size/2;
+		margin-top: -$size/2;
+		animation: 3s spinner linear infinite reverse;
+	}
 }
 
-.placeholder-comment {
-	margin: 2em 0;
-	text-align: center;
+@keyframes spinner {
+	0% {
+		transform: rotate(0);
+	}
+	33% {
+		transform: rotate(240deg);
+	}
+	66% {
+		transform: rotate(480deg);
+	}
+	100% {
+		transform: rotate(720deg);
+	}
 }

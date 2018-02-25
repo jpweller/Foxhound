@@ -21,7 +21,7 @@
 </head>
 
 <body <?php body_class(); ?>>
-<div id="page" class="site">
+	
 	<a class="skip-link screen-reader-text" href="#main"><?php esc_html_e( 'Skip to content', 'foxhound' ); ?></a>
 
 	<header id="masthead" class="site-header" role="banner">
@@ -29,8 +29,11 @@
 		<h1 class="site-branding">
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
 				<span class="screen-reader-text"><?php bloginfo( 'name' ); ?></span>
-				<svg class="logo" viewbox="0 0 120 24" width="120px">
-					<path class="logo-path" stroke="black" stroke-width="8" fill="none" stroke-dasharray="148" stroke-dashoffset="-67.5" d="M -46 4 C -36 4 -36,20 -26,20 C -16,20 -16,4 -6,4 C 4,4 4,20 14,20 C 24,20 24,4 34,4 C 44,4 44,20 54,20 C 64,20 64,4 74,4 C 84,4 84,20 94,20 C 104,20 104,4 114,4"></path>
+				<svg class="logo" viewbox="0 0 120 24">
+					<path stroke="black" stroke-width="8" fill="none" stroke-dasharray="148 148" stroke-dashoffset="-67.5" d="M -46,4 C -36,4 -36,20 -26,20 C -16,20 -16,4 -6,4 C 4,4 4,20 14,20 C 24,20 24,4 34,4 C 44,4 44,20 54,20 C 64,20 64,4 74,4 C 84,4 84,20 94,20 C 104,20 104,4 114,4">
+						<animateTransform attributeType="XML" attributeName="transform" type="translate" values="0 0; 40 0" begin="indefinite" dur="1s" keySplines="0.42 0 0.58 1" calcMode="spline" repeatCount="1"/>
+						<animate attributeType="XML" attributeName="stroke-dashoffset" values="-67.5; -13.5" begin="indefinite" dur="1s" keySplines="0.42 0 0.58 1" calcMode="spline" repeatCount="1"/>
+					</path>
 				</svg>
 			</a>
 		</h1>
@@ -85,5 +88,3 @@
 		</div>
 
 	</header>
-
-	<div id="content" class="site-content">

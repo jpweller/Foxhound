@@ -69,9 +69,10 @@ class SinglePost extends React.Component {
 		}
 
 		return (
-			<div className="card">
+			<div className="site-layout">
 				<QueryPosts postSlug={ this.props.slug } />
-				{ this.props.loading ? <Placeholder type="post" /> : this.renderArticle() }
+
+				{ this.props.loading ? <Placeholder /> : this.renderArticle() }
 			</div>
 		);
 	}

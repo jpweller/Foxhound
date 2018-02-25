@@ -67,10 +67,10 @@ class SinglePage extends React.Component {
 		}
 
 		return (
-			<div className="card">
+			<div className="site-layout">
 				<QueryPage pagePath={ this.props.path } />
 
-				{ this.props.loading ? <Placeholder type="page" /> : this.renderArticle() }
+				{ this.props.loading ? <Placeholder /> : this.renderArticle() }
 			</div>
 		);
 	}

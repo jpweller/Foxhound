@@ -31,7 +31,7 @@ function Doodles( props ) {
 	};
 
 	return (
-		<div className="site-content">
+		<div>
 			<DocumentMeta { ...meta } />
 			<BodyClass classes={ [ 'doodles' ] } />
 			<QueryDoodles query={ props.query } />

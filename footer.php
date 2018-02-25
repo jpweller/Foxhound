@@ -11,9 +11,9 @@
 
 ?>
 
-	</div><!-- #content -->
-
-</div><!-- #page -->
+<footer class="site-footer">
+	&copy; <?php echo date("Y"); ?> Jonathon Weller.
+</footer>
 
 <?php wp_footer(); ?>
 
