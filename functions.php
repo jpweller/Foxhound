@@ -183,51 +183,13 @@ add_action( 'wp_enqueue_scripts', 'foxhound_scripts' );
  * @return string Font stylesheet or empty string if disabled.
  */
 function foxhound_fonts_url() {
-	$fonts_url = '';
-
-	/*
-	 * Translators: If there are characters in your language that are not
-	 * supported by Alegreya, translate this to 'off'. Do not translate
-	 * into your own language.
-	 */
-	$alegreya = _x( 'on', 'Alegreya font: on or off', 'foxhound' );
-
-	/*
-	 * Translators: If there are characters in your language that are not
-	 * supported by Alegreya Sans, translate this to 'off'. Do not translate into
-	 * your own language.
-	 */
-	$alegreya_sans = _x( 'on', 'Alegreya Sans font: on or off', 'foxhound' );
-
-	/*
-	 * Translators: If there are characters in your language that are not
-	 * supported by Alegreya SC, translate this to 'off'. Do not translate into
-	 * your own language.
-	 */
-	$alegreya_sc = _x( 'on', 'Alegreya SC (smallcaps) font: on or off', 'foxhound' );
-
-	if ( 'off' !== $alegreya || 'off' !== $alegreya_sans || 'off' !== $alegreya_sc ) {
-		$font_families = array();
-
-		if ( 'off' !== $alegreya ) {
-			$font_families[] = rawurlencode( 'Alegreya:400,400italic,700,700italic,900italic' );
-		}
-
-		if ( 'off' !== $alegreya_sans ) {
-			$font_families[] = rawurlencode( 'Alegreya Sans:700' );
-		}
-
-		if ( 'off' !== $alegreya_sc ) {
-			$font_families[] = rawurlencode( 'Alegreya SC:700' );
-		}
-
-		$protocol = is_ssl() ? 'https' : 'http';
-		$query_args = array(
-			'family' => implode( '|', $font_families ),
-			'subset' => rawurlencode( 'latin,latin-ext' ),
-		);
-		$fonts_url = add_query_arg( $query_args, "$protocol://fonts.googleapis.com/css" );
-	}
+	$font_families[] = rawurlencode( 'Work+Sans:400,700' );
+	$protocol = is_ssl() ? 'https' : 'http';
+	$query_args = array(
+		'family' => implode( '|', $font_families ),
+		'subset' => rawurlencode( 'latin,latin-ext' ),
+	);
+	$fonts_url = add_query_arg( $query_args, "$protocol://fonts.googleapis.com/css" );
 
 	return $fonts_url;
 }

@@ -37,7 +37,7 @@ import Term from 'components/term';
 // Accessibility!
 import {
 	skipLink,
-	toggleFocus,
+	// toggleFocus,
 } from 'utils/a11y';
 
 // Now the work starts.
@@ -112,12 +112,12 @@ function renderApp() {
 // 	} );
 
 function initNoApiMenuFocus() {
-	const container = document.getElementById( 'site-navigation' );
+	const container = document.getElementById( 'masthead' );
 	if ( ! container ) {
 		return;
 	}
 
-	const menu = container.getElementsByTagName( 'div' )[ 1 ];
+	const menu = container.getElementsByClassName( 'site-nav' )[ 0 ];
 	// No menu, no need to run the rest.
 	if ( ! menu ) {
 		return;
@@ -141,14 +141,21 @@ function initNoApiMenuFocus() {
 		}
 	};
 
-	const links = menu.getElementsByTagName( 'a' );
+	const linksSite = menu.getElementsByTagName( 'a' );
 	// Each time a menu link is focused or blurred, toggle focus.
 	let i, len;
-	for ( i = 0, len = links.length; i < len; i++ ) {
-		links[ i ].addEventListener( 'focus', toggleFocus, true );
-		links[ i ].addEventListener( 'blur', toggleFocus, true );
-		links[ i ].addEventListener( 'click', closeMenu, true );
+	for ( i = 0, len = linksSite.length; i < len; i++ ) {
+		// linksSite[ i ].addEventListener( 'focus', toggleFocus, true );
+		// linksSite[ i ].addEventListener( 'blur', toggleFocus, true );
+		linksSite[ i ].addEventListener( 'click', closeMenu, true );
 	}
+
+	// const linksSocial = menuSocial.getElementsByTagName( 'a' );
+	// // Each time a menu link is focused or blurred, toggle focus.
+	// for ( i = 0, len = linksSocial.length; i < len; i++ ) {
+	// 	// linksSocial[ i ].addEventListener( 'focus', toggleFocus, true );
+	// 	// linksSocial[ i ].addEventListener( 'blur', toggleFocus, true );
+	// }
 }
 
 // Set up link capture on all links in the app context.
@@ -210,8 +217,19 @@ function renderPreloadData() {
 	}
 }
 
+function logoHover() {
+	jQuery( '.logo path' ).bind( 'webkitAnimationEnd mozAnimationEnd animationend', function() {
+		jQuery( '.logo' ).removeClass( 'animated' );
+	} );
+
+	jQuery( '.logo' ).mouseenter( function() {
+		jQuery( this ).addClass( 'animated' );
+	} );
+}
+
 document.addEventListener( 'DOMContentLoaded', function() {
 	renderApp();
 	renderPreloadData();
 	handleLinkClick();
+	logoHover();
 } );

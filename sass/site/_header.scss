@@ -5,48 +5,62 @@
 	position: fixed;
 	top: 0;
 	left: 0;
-	width: 100%;
+	right: 0;
 	height: 64px;
 	z-index: 9999;
 
-	background: white;
+	display: grid;
+	grid-template-columns: 24px auto 30px 24px;
+	grid-template-rows: 20px 24px 20px;
+
+	@include breakpoint( '<660px' ) {
+		background: white;
+	}
 
 	@include breakpoint( '>660px' ) {
-		background: none;
+		grid-template-columns: max-content;
 	}
 }
 
 .site-branding {
-	float: left;
-	@include breakpoint( '>660px' ) {
-		float: none;
-	}
-}
+	grid-row: 2;
+	grid-column: 2;
 
-.site-title {
-	line-height: 0;
+	@include breakpoint( '>660px' ) {
+		display: flex;
+		justify-content: center;
+	}
+
 	a {
 		display: block;
-		margin: 20px 24px;
-		width: 98px;
+		height: 24px;
+		width: 120px;
 
 		&:focus {
 			text-decoration: underline;
 		}
-
-		@include breakpoint( '>660px' ) {
-			margin: 20px auto;
-		}
 	}
 }
 
-.main-navigation {
-	float: right;
-	width: 24 + 24 + 28px;
+.logo {
+	width: 120px;
+	height: 24px;
+  &:hover {
+    cursor: pointer;
+  }
+  &.animated {
+    path {
+      animation: animateStroke 1s;
+    }
+  }
+}
 
-	@include breakpoint( '>660px' ) {
-		float: none;
-		height: 0;
-		width: 0;
-	}
+@keyframes animateStroke {
+  0% {
+    stroke-dashoffset: -13.5 * 5;
+  }
+  100% {
+    stroke-dashoffset: -13.5;
+    d: path("M -6 4 C 4 4 4,20 14,20 C 24,20 24,4 34,4 C 44,4 44,20 54,20 C 64,20 64,4 74,4 C 84,4 84,20 94,20 C 104,20 104,4 114,4 C 124,4 124,20 134,20 C 144,20 144,4 154,4");
+  }
 }

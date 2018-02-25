@@ -4,17 +4,13 @@ h1, h2 {
 
 h3, h4, h5, h6 {
 	font-family: $font__main;
-	font-weight: $font__weight-black;
 }
 
 .page-title,
-.entry-title,
-.comments-title,
-.comment-reply-title {
+.entry-title {
 	margin-top: 0;
 	margin-bottom: 20px;
 	font-family: $font__main;
-	font-weight: $font__weight-bold;
 	@include font-size( $font__size-header );
 	line-height: 1.1;
 	color: $red;
@@ -22,23 +18,4 @@ h3, h4, h5, h6 {
 	@include breakpoint( '<480px' ) {
 		@include font-size( $font__size-header - 4 );
 	}
-}
-
-.comments-title,
-.comment-reply-title {
-	text-align: center;
-}
-
-.widget-title,
-.widget_calendar th,
-.widget_calendar #next,
-.widget_calendar #prev {
-	margin-top: 0;
-	margin-bottom: 20px;
-	font-family: $font__nav;
-	font-weight: $font__weight-bold;
-	text-transform: uppercase;
-	@include font-size( 16 );
-	line-height: 1.25;
-	letter-spacing: 1.6px;
 }
